@@ -3,12 +3,16 @@ import jsonwebtoken from 'jsonwebtoken'
 import { createLogger } from '../../utils/logger.mjs'
 
 const logger = createLogger('auth')
-
-const jwksUrl = 'https://test-endpoint.auth0.com/.well-known/jwks.json'
+const jwksUrl = process.env.JSON_WEB_KEY_SET
+const auth0Secret = process.env.AUTH0_SECRET
 
 export async function handler(event) {
   try {
     const jwtToken = await verifyToken(event.authorizationToken)
+
+    logger.info('User was authorized', {
+      jwtToken
+    })
 
     return {
       principalId: jwtToken.sub,
@@ -44,10 +48,10 @@ export async function handler(event) {
 
 async function verifyToken(authHeader) {
   const token = getToken(authHeader)
-  const jwt = jsonwebtoken.decode(token, { complete: true })
+  // const jwt = jsonwebtoken.decode(token, { complete: true })
 
-  // TODO: Implement token verification
-  return undefined;
+  // Implement token verification
+  return jsonwebtoken.verify(token, auth0Secret);
 }
 
 function getToken(authHeader) {
