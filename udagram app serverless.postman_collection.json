@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "8645f5cf-991b-42b0-8f0f-ed70b68385c5",
+		"name": "udagram app serverless",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16590450"
+	},
+	"item": [
+		{
+			"name": "get todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pxp8ffldhg.execute-api.us-east-1.amazonaws.com/dev/todos",
+					"protocol": "https",
+					"host": [
+						"pxp8ffldhg",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create todo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Task 9\",\r\n    \"dueDate\": \"2024-06-06\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pxp8ffldhg.execute-api.us-east-1.amazonaws.com/dev/todos",
+					"protocol": "https",
+					"host": [
+						"pxp8ffldhg",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update todo",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Task 9 edit\",\r\n    \"dueDate\": \"2024-06-07\",\r\n    \"done\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pxp8ffldhg.execute-api.us-east-1.amazonaws.com/dev/todos/72eaf6a7-31bd-45c0-ac42-9667115879d9",
+					"protocol": "https",
+					"host": [
+						"pxp8ffldhg",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"todos",
+						"72eaf6a7-31bd-45c0-ac42-9667115879d9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete todo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://pxp8ffldhg.execute-api.us-east-1.amazonaws.com/dev/todos/72eaf6a7-31bd-45c0-ac42-9667115879d9",
+					"protocol": "https",
+					"host": [
+						"pxp8ffldhg",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"todos",
+						"72eaf6a7-31bd-45c0-ac42-9667115879d9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generateUploadUrl",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://pxp8ffldhg.execute-api.us-east-1.amazonaws.com/dev/todos/72eaf6a7-31bd-45c0-ac42-9667115879d9/attachment",
+					"protocol": "https",
+					"host": [
+						"pxp8ffldhg",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"todos",
+						"72eaf6a7-31bd-45c0-ac42-9667115879d9",
+						"attachment"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Il9oaWExNG9QaUZ2aHItRmx1enU0VCJ9.eyJpc3MiOiJodHRwczovL2Rldi1kc29heTY0bHY4YXV6dWZpLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NjViMDUzMDY3ZWVkOGNmZjAyYzUwZDMiLCJhdWQiOlsiaHR0cHM6Ly9kZXYtZHNvYXk2NGx2OGF1enVmaS51cy5hdXRoMC5jb20vYXBpL3YyLyIsImh0dHBzOi8vZGV2LWRzb2F5NjRsdjhhdXp1ZmkudXMuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTcxNzMwMjcyNSwiZXhwIjoxNzE3Mzg5MTI1LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiYXpwIjoiYnRaRFdLY0h2YzYyS0cyNWNmTDRJdUlxczhQRnk1cGwifQ.qnJHRWHQ77q0XAxqbpByzMiN7U7KeHPPRBDi3fJD77IUMPlLiYstZyDMyAm9OzPvpGJ6sQVkhzpgIAQB_KbGEgOltOU-enBNvkudWpBE9K-KtD26guvafzDku9hwfp46qa38oQXbvcGDxPeKzh8-Z_CIDvIOY7h00kE8Lq7nqlAPBkS7VRUfRPKt4XomHMLpkwuw8IDBjmDMTvO30lNZM4vxr8XQ_-2znGposfuQDEt-ylu1Q_ihb5pJHnPJS28CvsXle_uCrk6RzMEQbTkJ9PcZrg0rdr2gfroFKi5hhzQ8onrWRjk-EMBQX61PDrNK1ElskAe3oUowXWrfz6m4ww",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
