@@ -1,9 +1,14 @@
 import { DynamoDB } from '@aws-sdk/client-dynamodb'
 import { DynamoDBDocument } from '@aws-sdk/lib-dynamodb'
 import { createLogger } from '../utils/logger.mjs'
+import AWSXRay from 'aws-xray-sdk-core'
 
 const todoAccessLogger = createLogger('todoAccess')
-const dynamoDbClient = DynamoDBDocument.from(new DynamoDB())
+
+const dynamoDb = new DynamoDB()
+const dynamoDbXRay = AWSXRay.captureAWSv3Client(dynamoDb)
+const dynamoDbClient = DynamoDBDocument.from(dynamoDbXRay)
+
 const todosTable = process.env.TODOS_TABLE
 const todosCreatedAtIndex = process.env.TODOS_CREATED_AT_INDEX
 
