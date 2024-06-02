@@ -1,9 +1,9 @@
-export class TodosStatus {
-    HEADERS = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true
-    } 
+const HEADERS = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': true
+}
 
+export class TodosStatus {
     static OK(data) {
         return {
             statusCode: 200,

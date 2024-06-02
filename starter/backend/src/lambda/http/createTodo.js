@@ -18,6 +18,6 @@ export async function handler(event) {
   const newItem = await createTodo(userId, newTodo)
 
   return TodosStatus.CREATED({
-    newItem: newItem
+    "item": newItem
   })
 }

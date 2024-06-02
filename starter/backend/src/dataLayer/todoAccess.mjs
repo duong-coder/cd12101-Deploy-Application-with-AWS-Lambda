@@ -17,23 +17,25 @@ export async function getTodosByUserId(userId) {
         ExpressionAttributeValues: {
             ':userId': userId
         }
-    }).promise()
+    })
 
-    return result
+    return result.Items
 }
 
 export async function getTodoByUserIdAndTodoId(userId, todoId) {
     const result = await dynamoDbClient.query({
         TableName: todosTable,
         IndexName: todosCreatedAtIndex,
-        KeyConditionExpression: 'userId = :userId AND todoId = :todoId',
+        KeyConditionExpression: 'userId = :userId AND createdAt <= :createdAt',
+        FilterExpression: 'todoId = :todoId',
         ExpressionAttributeValues: {
             ':userId': userId,
-            ':todoId': todoId
+            ':todoId': todoId,
+            ':createdAt': new Date().toISOString()
         }
-    }).promise()
+    })
 
-    return result
+    return result.Items[0]
 }
 
 export async function getTodoAttachmentUrlByUserIdAndTodoId(userId, todoId) {
@@ -46,26 +48,26 @@ export async function getTodoAttachmentUrlByUserIdAndTodoId(userId, todoId) {
             ':userId': userId,
             ':todoId': todoId,
         }
-    }).promise()
+    })
 
-    return result
+    return result.Items[0]
 }
 
 export async function updateAttachmentUrlByUserIdAndTodoId(userId, todoId, attachmentUrl) {
     todoAccessLogger.info('todoAccess updateAttachmentUrl', { attachmentUrl })
 
     const result = await dynamoDbClient.update({
-        TableName: this.todosTable,
+        TableName: todosTable,
         Key: {
-            todoId
+            'userId': userId,
+            'todoId': todoId
         },
         UpdateExpression: 'set attachmentUrl = :attachmentUrl',
-        KeyConditionExpression: 'userId = :userId',
         ExpressionAttributeValues: {
-            ':attachmentUrl': attachmentUrl,
-            ':userId': userId
-        }
-    }).promise()
+            ':attachmentUrl': attachmentUrl
+        },
+        ReturnValues: 'ALL_NEW'
+    })
 
     return result
 }
@@ -76,7 +78,7 @@ export async function insertTodo(newItem) {
     await dynamoDbClient.put({
         TableName: todosTable,
         Item: newItem
-    }).promise()
+    })
 }
 
 export async function updateTodoByItem(updateItem) {
@@ -85,7 +87,7 @@ export async function updateTodoByItem(updateItem) {
     await dynamoDbClient.put({
         TableName: todosTable,
         Item: updateItem
-    }).promise()
+    })
 
     return updateItem
 }
@@ -95,12 +97,12 @@ export async function deleteTodoByUserIdAndTodoId(userId, todoId) {
 
     const result = await dynamoDbClient.delete({
         TableName: todosTable,
-        ConditionExpression: "userId = :userId AND todoId = :todoId",
-        ExpressionAttributeValues: {
+        Key: {
             'userId': userId,
             'todoId': todoId
-        }
-    }).promise()
+        },
+        ReturnValues: 'ALL_OLD'
+    })
 
     return result
 }

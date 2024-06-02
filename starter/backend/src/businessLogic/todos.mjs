@@ -9,7 +9,7 @@ export async function createTodo(userId, newTodo) {
         todoId: todoId,
         createdAt: new Date().toISOString(),
         done: false,
-        attachmentUrl: null,
+        attachmentUrl: "",
         ...newTodo
     }
 
@@ -32,7 +32,8 @@ export async function updateTodo(userId, todoId, updatedTodo) {
 }
 
 export async function deleteTodo(userId, todoId) {
-    return await deleteTodoByUserIdAndTodoId(userId, todoId)
+    const todoDeleted = await deleteTodoByUserIdAndTodoId(userId, todoId)
+    return todoDeleted.Attributes
 }
 
 export async function generateUploadUrl(attachmentId) {

@@ -9,25 +9,14 @@
         "dueDate": {
             "type": "string"
         },
-        "userId": {
-            "type": "string"
-        },
-        "createdAt": {
-            "type": "string"
-        },
         "done": {
             "type": "boolean"
-        },
-        "attachmentUrl": {
-            "type": "string"
         }
     },
     "required": [
         "name",
         "dueDate",
-        "done",
-        "createdAt",
-        "attachmentUrl"
+        "done"
     ],
     "additionalProperties": false
 }

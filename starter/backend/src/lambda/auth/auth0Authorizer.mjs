@@ -51,7 +51,10 @@ async function verifyToken(authHeader) {
   // const jwt = jsonwebtoken.decode(token, { complete: true })
 
   // Implement token verification
-  return jsonwebtoken.verify(token, auth0Secret);
+  const cert = await getCertificate()
+
+  // return jsonwebtoken.verify(token, auth0Secret);
+  return jsonwebtoken.verify(token, cert, { algorithms: ['RS256'] });
 }
 
 function getToken(authHeader) {
@@ -64,4 +67,12 @@ function getToken(authHeader) {
   const token = split[1]
 
   return token
+}
+
+async function getCertificate() {
+  const response = await Axios.get(jwksUrl)
+  const pub = response.data.keys[0].x5c[0]
+  const cert = `-----BEGIN CERTIFICATE-----\n${pub}\n-----END CERTIFICATE-----\n`
+
+  return cert
 }

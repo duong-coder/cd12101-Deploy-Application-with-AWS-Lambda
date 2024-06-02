@@ -19,6 +19,6 @@ export async function getUploadUrl(attachmentId) {
 }
 
 export async function getAttachmentUrl(attachmentId) {
-  const attachmentUrl = `https://${this.bucketName}.s3.amazonaws.com/${attachmentId}`
+  const attachmentUrl = `https://${bucketName}.s3.amazonaws.com/${attachmentId}`
   return attachmentUrl
 }

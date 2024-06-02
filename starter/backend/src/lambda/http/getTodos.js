@@ -11,5 +11,7 @@ export async function handler(event) {
 
   const result = await getTodos(userId)
 
-  return TodosStatus.OK(result)
+  return TodosStatus.OK({
+    "items": [...result]
+  })
 }
