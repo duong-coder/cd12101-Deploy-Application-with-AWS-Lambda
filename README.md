@@ -1,7 +1,9 @@
 # For verify project
-Host backend: https://pxp8ffldhg.execute-api.us-east-1.amazonaws.com/dev
-Import postman to do test: [udagram app serverless](./udagram%20app%20serverless.postman_collection.json)
-Client localhost:
+**Host backend**: https://pxp8ffldhg.execute-api.us-east-1.amazonaws.com/dev
+
+**Import postman to do test**: [udagram app serverless](./udagram%20app%20serverless.postman_collection.json)
+
+**Client localhost**:
 ![Client localhost](./client-localhost.png "Client localhost")
 
 # Serverless TODO
