@@ -1,10 +1,34 @@
 # For verify project
+
 **Host backend**: https://pxp8ffldhg.execute-api.us-east-1.amazonaws.com/dev
 
 **Import postman to do test**: [udagram app serverless](./udagram%20app%20serverless.postman_collection.json)
 
 **Client localhost**:
 ![Client localhost](./client-localhost.png "Client localhost")
+
+# Fix comment review
+
+**Request validate**:
+![Request validate](./request-validate.png "Request validate")
+
+**Wrap the aws-sdk with xray and instantiate dynamodb and s3 with the wrapped sdk**:
+DynamoDB
+`
+import AWSXRay from 'aws-xray-sdk-core'
+
+const dynamoDb = new DynamoDB()
+const dynamoDbXRay = AWSXRay.captureAWSv3Client(dynamoDb)
+const dynamoDbClient = DynamoDBDocument.from(dynamoDbXRay)
+`
+
+S3
+`
+import AWSXRay from 'aws-xray-sdk-core'
+
+const s3Client = new S3Client()
+const s3ClientXRay = AWSXRay.captureAWSv3Client(s3Client)
+`
 
 # Serverless TODO
 
